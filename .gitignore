@@ -1,0 +1,6 @@
+# goland project file
+.idea
+# golang build dist
+dist
+# goland graphql plugin file
+.graphqlconfig

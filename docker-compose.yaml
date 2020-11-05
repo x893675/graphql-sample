@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres:
+    image: "postgres:12.2"
+    environment:
+      - POSTGRES_PASSWORD=graphql
+      - POSTGRES_DB=graphql
+    restart: always
+    ports:
+      - "5432:5432"
+    container_name: "postgres"
+  postgres-ctl:
+    image: "postgres:12.2"
+    environment:
+      - POSTGRES_DB=graphql
+      - PGPASSWORD=graphql
+    entrypoint:
+      - /bin/sh
+      - -c
+      - sleep 5 && psql -v ON_ERROR_STOP=1 -h postgres -p 5432 --username postgres --dbname graphql -c "create extension if not exists \"uuid-ossp\"";
+    container_name: "postgres-ctl"
+    depends_on:
+      - postgres

@@ -1,0 +1,77 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Answer {
+    createdAt: Time!
+    id: ID!
+    isCorrect: Boolean!
+    optionId: ID!
+    questionId: ID!
+    updatedAt: Time!
+}
+
+type AnswerResponse {
+    data: Answer
+    dataList: [Answer]
+    message: String!
+    status: Int!
+}
+
+type Mutation {
+    CreateAnswer(optionId: ID!, questionId: ID!): AnswerResponse
+    CreateQuestion(question: QuestionInput!): QuestionResponse
+    DeleteAnswer(id: ID!): AnswerResponse
+    DeleteQuestion(id: ID!): QuestionResponse
+    UpdateAnswer(id: ID!, optionId: ID!, questionId: ID!): AnswerResponse
+    UpdateQuestion(id: ID!, question: QuestionInput!): QuestionResponse
+}
+
+type Query {
+    GetAllQuestionAnswers(questionId: ID!): AnswerResponse
+    GetAllQuestions: QuestionResponse
+    GetOneAnswer(id: ID!): AnswerResponse
+    GetOneQuestion(id: ID!): QuestionResponse
+}
+
+type Question {
+    createdAt: Time!
+    id: ID!
+    questionOption: [QuestionOption]
+    title: String!
+    updatedAt: Time!
+}
+
+type QuestionOption {
+    createdAt: Time!
+    id: ID!
+    isCorrect: Boolean!
+    position: Int!
+    questionId: ID!
+    title: String!
+    updatedAt: Time!
+}
+
+type QuestionResponse {
+    data: Question
+    dataList: [Question]
+    message: String!
+    status: Int!
+}
+
+input QuestionInput {
+    options: [QuestionOptionInput!]!
+    title: String!
+}
+
+input QuestionOptionInput {
+    isCorrect: Boolean!
+    position: Int!
+    title: String!
+}
+
+
+scalar Time
